@@ -1,1 +1,1 @@
-# Godot Template
+# Godot 2D Platformer Template
