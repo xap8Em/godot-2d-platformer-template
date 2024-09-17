@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccsw7wulvgbkr"]
+
+[ext_resource type="Script" path="res://player_characters/player_character.gd" id="1_l1xbt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ioyyw"]
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+script = ExtResource("1_l1xbt")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ioyyw")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
