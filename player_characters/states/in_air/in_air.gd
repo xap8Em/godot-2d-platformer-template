@@ -12,6 +12,6 @@ func physics_process(delta: float) -> void:
 
 			return
 
-		exiting.emit("moving")
+		exiting.emit("moving_on_floor")
 
 		return

@@ -15,9 +15,9 @@ func _init(player_character: PlayerCharacter) -> void:
 			).new(player_character)
 	)
 	_add_state(
-			"moving",
+			"moving_on_floor",
 			preload(
-					"res://player_characters/states/on_floor/moving.gd"
+					"res://player_characters/states/on_floor/moving_on_floor.gd"
 			).new(player_character)
 	)
 	_add_state(
