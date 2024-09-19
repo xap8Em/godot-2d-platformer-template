@@ -12,6 +12,11 @@ func physics_process(delta: float) -> void:
 
 			return
 
-		exiting.emit("moving_on_floor")
+		if Input.is_action_pressed("dash"):
+			exiting.emit("dashing")
+
+			return
+
+		exiting.emit("walking")
 
 		return
