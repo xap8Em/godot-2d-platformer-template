@@ -1,3 +1,4 @@
+class_name PlayerCharacter
 extends CharacterBody2D
 
 
@@ -5,19 +6,36 @@ const MOVEMENT_SPEED: float = 300.0
 const MOVEMENT_ACCEL: float = 1200.0
 const JUMP_SPEED: float = 400.0
 
+var _state_machine: StateMachine
+var _input_movement_axis: float
+
+
+func _init() -> void:
+	_state_machine = preload("res://player_characters/state_machine.gd").new(self)
+
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("jump") and is_on_floor():
-		velocity.y = -JUMP_SPEED
+	_state_machine.unhandled_input(event)
 
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	_state_machine.physics_process(delta)
 
-	var input_movement_axis: float = Input.get_axis("move_left", "move_right")
+
+func apply_movement_velocity(delta: float) -> void:
+	_input_movement_axis = Input.get_axis("move_left", "move_right")
 
 	velocity.x = move_toward(velocity.x,
-			input_movement_axis * MOVEMENT_SPEED, MOVEMENT_ACCEL * delta)
+			_input_movement_axis * MOVEMENT_SPEED, MOVEMENT_ACCEL * delta)
 
-	move_and_slide()
+
+func apply_jump_velocity() -> void:
+	velocity.y = -JUMP_SPEED
+
+
+func apply_falling_velocity(delta: float) -> void:
+	velocity += get_gravity() * delta
+
+
+func get_input_movement_axis() -> float:
+	return _input_movement_axis
