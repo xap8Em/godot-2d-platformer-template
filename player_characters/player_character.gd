@@ -15,6 +15,8 @@ var _movement_speed: float
 func _init() -> void:
 	_state_machine = preload("res://player_characters/state_machine.gd").new(self)
 
+	_state_machine.current_state_changed.connect(_on_current_state_changed)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	_state_machine.unhandled_input(event)
@@ -45,3 +47,7 @@ func get_input_movement_axis() -> float:
 
 func set_movement_speed(value: float) -> void:
 	_movement_speed = value
+
+
+func _on_current_state_changed(current_state_name: StringName) -> void:
+	DebugMenu.set_info_value("player_character/state", current_state_name)
