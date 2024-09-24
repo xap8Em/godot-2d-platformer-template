@@ -4,7 +4,7 @@ extends "res://player_characters/states/in_air/in_air.gd"
 func enter() -> void:
 	super()
 
-	_player_character.apply_jump_velocity()
+	_player_character.jump()
 
 
 func physics_process(delta: float) -> void:

@@ -26,18 +26,18 @@ func _physics_process(delta: float) -> void:
 	_state_machine.physics_process(delta)
 
 
-func apply_movement_velocity(delta: float) -> void:
+func move_on_ground(delta: float) -> void:
 	_input_movement_axis = Input.get_axis("move_left", "move_right")
 
 	velocity.x = move_toward(velocity.x,
 			_input_movement_axis * _movement_speed, MOVEMENT_ACCEL * delta)
 
 
-func apply_jump_velocity() -> void:
+func jump() -> void:
 	velocity.y = -JUMP_SPEED
 
 
-func apply_falling_velocity(delta: float) -> void:
+func fall(delta: float) -> void:
 	velocity += get_gravity() * delta
 
 

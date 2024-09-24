@@ -9,6 +9,6 @@ func _init(player_character: PlayerCharacter) -> void:
 
 
 func physics_process(delta: float) -> void:
-	_player_character.apply_movement_velocity(delta)
+	_player_character.move_on_ground(delta)
 
 	_player_character.move_and_slide()
