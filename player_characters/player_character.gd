@@ -8,8 +8,7 @@ const MOVEMENT_ACCEL: float = 1200.0
 const JUMP_SPEED: float = 400.0
 
 var _state_machine: StateMachine
-var _input_movement_axis: float
-var _movement_speed: float
+var _horizontal_movement_speed: float
 
 
 func _init() -> void:
@@ -26,11 +25,20 @@ func _physics_process(delta: float) -> void:
 	_state_machine.physics_process(delta)
 
 
-func move_on_ground(delta: float) -> void:
-	_input_movement_axis = Input.get_axis("move_left", "move_right")
+func start_walking() -> void:
+	_horizontal_movement_speed = WALKING_SPEED
 
-	velocity.x = move_toward(velocity.x,
-			_input_movement_axis * _movement_speed, MOVEMENT_ACCEL * delta)
+
+func walk(delta: float):
+	_move_horizontally(delta)
+
+
+func start_dashing() -> void:
+	_horizontal_movement_speed = DASH_SPEED
+
+
+func dash(delta: float):
+	_move_horizontally(delta)
 
 
 func jump() -> void:
@@ -40,13 +48,17 @@ func jump() -> void:
 func fall(delta: float) -> void:
 	velocity += get_gravity() * delta
 
-
-func get_input_movement_axis() -> float:
-	return _input_movement_axis
+	_move_horizontally(delta)
 
 
-func set_movement_speed(value: float) -> void:
-	_movement_speed = value
+func _move_horizontally(delta: float) -> void:
+	var input_movement_axis: float = Input.get_axis("move_left", "move_right")
+
+	velocity.x = move_toward(
+			velocity.x,
+			input_movement_axis * _horizontal_movement_speed,
+			MOVEMENT_ACCEL * delta
+	)
 
 
 func _on_current_state_changed(current_state_name: StringName) -> void:

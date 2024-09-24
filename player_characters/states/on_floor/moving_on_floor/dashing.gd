@@ -4,7 +4,7 @@ extends "res://player_characters/states/on_floor/moving_on_floor/moving_on_floor
 func enter() -> void:
 	super()
 
-	_player_character.set_movement_speed(_player_character.DASH_SPEED)
+	_player_character.start_dashing()
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -14,3 +14,9 @@ func unhandled_input(event: InputEvent) -> void:
 		exiting.emit("walking")
 
 		return
+
+
+func physics_process(delta: float) -> void:
+	super(delta)
+
+	_player_character.dash(delta)
